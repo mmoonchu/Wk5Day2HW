@@ -28,3 +28,16 @@ menuLinks.forEach((link) => {
     linkVar.textContent = `${link.text}`;
     topMenuEl.append(linkVar);
 })
+
+// 4.0
+const subMenuEl = document.querySelector('#sub-menu');
+// 4.1
+subMenuEl.style.height = '100%';
+// 4.2
+subMenuEl.style.backgroundColor = getComputedStyle(document.documentElement).getPropertyValue('--sub-menu-bg');
+// 4.3
+subMenuEl.classList.add('flex-around');
+// 4.4
+subMenuEl.style.position = 'absolute';
+// 4.5
+subMenuEl.style.top = '0';
