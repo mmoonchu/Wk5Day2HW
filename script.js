@@ -1,10 +1,21 @@
 // Menu data structure
 var menuLinks = [
-    {text: 'about', href: '/about'},
-    {text: 'catalog', href: '/catalog'},
-    {text: 'orders', href: '/orders'},
-    {text: 'account', href: '/account'},
-  ];
+  {text: 'about', href: '/about'},
+  {text: 'catalog', href: '#', subLinks: [
+    {text: 'all', href: '/catalog/all'},
+    {text: 'top selling', href: '/catalog/top'},
+    {text: 'search', href: '/catalog/search'},
+  ]},
+  {text: 'orders', href: '#' , subLinks: [
+    {text: 'new', href: '/orders/new'},
+    {text: 'pending', href: '/orders/pending'},
+    {text: 'history', href: '/orders/history'},
+  ]},
+  {text: 'account', href: '#', subLinks: [
+    {text: 'profile', href: '/account/profile'},
+    {text: 'sign out', href: '/account/signout'},
+  ]},
+];
 // 1.0
 const mainEl = document.querySelector('main');
 // 1.1
@@ -41,3 +52,29 @@ subMenuEl.classList.add('flex-around');
 subMenuEl.style.position = 'absolute';
 // 4.5
 subMenuEl.style.top = '0';
+// 5.1
+const topMenuLinks = topMenuEl.querySelectorAll('a');
+const showingSubMenu = false;
+// 5.2
+topMenuEl.addEventListener('click', (e) => {
+  e.preventDefault();
+  if (![...document.querySelectorAll('a')].includes(e.target)) {
+    return;
+  }
+  console.log(e.target);
+  // 5.3
+  if (e.target.classList.contains('active')) {
+    e.target.classList.remove('active');
+    showingSubMenu = false;
+    subMenuEl.style.top = '0';
+    return;
+  }
+  // 5.4
+  [...topMenuLinks.querySelectorAll('a')].forEach((a) => {
+    a.classList.remove('active');
+  })
+  // 5.5
+  e.target.classList.add('active');
+  // 5.6
+  if (e.target.)
+})
