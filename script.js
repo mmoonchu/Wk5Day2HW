@@ -79,10 +79,10 @@ topMenuEl.addEventListener('click', (e) => {
   // 5.6
   let activeLink;
   if (menuLinks.some((link) => {
-      link.text === e.target.textContent && link.subLinks;
+      activeLink = link;
+      return link.text === e.target.textContent && link.subLinks;
   })) {
     showingSubMenu = true;
-    activeLink = link;
   } else {
     showingSubMenu = false;
   }
@@ -103,3 +103,4 @@ function buildSubMenu(sublinks) {
     subMenuEl.append(newLink)
   });
 }
+// 5.8
