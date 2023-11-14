@@ -54,14 +54,14 @@ subMenuEl.style.position = 'absolute';
 subMenuEl.style.top = '0';
 // 5.1
 const topMenuLinks = topMenuEl.querySelectorAll('a');
-const showingSubMenu = false;
+let showingSubMenu = false;
 // 5.2
 topMenuEl.addEventListener('click', (e) => {
   e.preventDefault();
   if (![...document.querySelectorAll('a')].includes(e.target)) {
     return;
   }
-  console.log(e.target);
+  // console.log(e.target.textContent);
   // 5.3
   if (e.target.classList.contains('active')) {
     e.target.classList.remove('active');
@@ -70,11 +70,36 @@ topMenuEl.addEventListener('click', (e) => {
     return;
   }
   // 5.4
-  [...topMenuLinks.querySelectorAll('a')].forEach((a) => {
+  [...topMenuLinks].forEach((a) => {
+    // if (a )
     a.classList.remove('active');
   })
   // 5.5
   e.target.classList.add('active');
   // 5.6
-  if (e.target.)
-})
+  let activeLink;
+  if (menuLinks.some((link) => {
+      link.text === e.target.textContent && link.subLinks;
+  })) {
+    showingSubMenu = true;
+    activeLink = link;
+  } else {
+    showingSubMenu = false;
+  }
+  // 5.7
+  if (showingSubMenu === true) {
+    buildSubMenu(activeLink.subLinks);
+    subMenuEl.style.top = '100%';
+  } else {
+    subMenuEl.style.top = '0';
+  }
+});
+function buildSubMenu(sublinks) {
+  subMenuEl.innerHTML = '';
+  sublinks.forEach((sublink) => {
+    let newLink = document.createElement('a');
+    newLink.setAttribute('href', sublink.href);
+    newLink.textContent = sublink.text;
+    subMenuEl.append(newLink)
+  });
+}
