@@ -94,6 +94,7 @@ topMenuEl.addEventListener('click', (e) => {
     subMenuEl.style.top = '0';
   }
 });
+// 5.8
 function buildSubMenu(sublinks) {
   subMenuEl.innerHTML = '';
   sublinks.forEach((sublink) => {
@@ -103,4 +104,25 @@ function buildSubMenu(sublinks) {
     subMenuEl.append(newLink)
   });
 }
-// 5.8
+// 6.0
+subMenuEl.addEventListener('click', (e) => {
+  e.preventDefault();
+  if (!e.target.tagName === 'A') {
+    return;
+  }
+  // 6.1
+  showingSubMenu = false;
+  subMenuEl.style.top = '0';
+  // 6.2
+  topMenuLinks.forEach((element) => {
+    element.removeAttribute('active');
+  })
+  // 6.3
+  mainEl.innerHTML = `<h1>${e.target.innerText}</h1>`;
+})
+// 6.4
+topMenuEl.addEventListener('click', (e) => {
+  if (e.target.textContent === 'about') {
+    mainEl.innerHTML = '<h1>about</h1>';
+  }
+})
